@@ -119,6 +119,14 @@ jobs:
           CGO_LDFLAGS: "-mmacosx-version-min=11.0"
         run: wails build -production -o xbar
 
+      - name: Assemble .app bundle (arm64)
+        working-directory: app
+        run: |
+          mkdir -p build/bin/xbar.app/Contents/MacOS
+          cp build/bin/xbar build/bin/xbar.app/Contents/MacOS/xbar
+          chmod +x build/bin/xbar.app/Contents/MacOS/xbar
+          cp build/darwin/Info.plist build/bin/xbar.app/Contents/Info.plist
+
       - name: Verify architecture
         run: lipo -info app/build/bin/xbar.app/Contents/MacOS/xbar || file app/build/bin/xbar.app/Contents/MacOS/xbar
 
@@ -192,6 +200,14 @@ jobs:
           CGO_ENABLED: "1"
           CGO_LDFLAGS: "-mmacosx-version-min=10.13"
         run: wails build -production -o xbar
+
+      - name: Assemble .app bundle (amd64)
+        working-directory: app
+        run: |
+          mkdir -p build/bin/xbar.app/Contents/MacOS
+          cp build/bin/xbar build/bin/xbar.app/Contents/MacOS/xbar
+          chmod +x build/bin/xbar.app/Contents/MacOS/xbar
+          cp build/darwin/Info.plist build/bin/xbar.app/Contents/Info.plist
 
       - name: Verify architecture
         run: lipo -info app/build/bin/xbar.app/Contents/MacOS/xbar || file app/build/bin/xbar.app/Contents/MacOS/xbar
