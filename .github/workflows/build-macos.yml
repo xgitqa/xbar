@@ -386,13 +386,6 @@ jobs:
           ${GATEKEEPER}
           RELNOTES
 
-          if [[ "${GITHUB_REF}" != refs/tags/* ]]; then
-            git config user.email "actions@github.com"
-            git config user.name "GitHub Actions"
-            git tag -a "$V" -m "Release $V"
-            git push origin "$V"
-          fi
-
           gh release create "$V" "$ZIP" \
             --repo "${{ github.repository }}" \
             --title "xbar $V (Apple Silicon + Intel)" \
