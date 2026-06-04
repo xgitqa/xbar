@@ -147,11 +147,11 @@ jobs:
           path: /tmp/xbar-app-bundle.tar.gz
           retention-days: 1
 
-  # ── 2. Native amd64 build ────────────────────────────────────────────────────
+  # ── 2. Cross-compile amd64 on macos-14 (avoids scarce macos-13 runners) ───────
   build-amd64:
-    name: Build amd64 (Intel)
+    name: Build amd64 (Intel, cross-compiled)
     needs: test
-    runs-on: macos-13
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
         with:
@@ -194,11 +194,15 @@ jobs:
         working-directory: app
         run: wails doctor || true
 
-      - name: Build (darwin/amd64)
+      - name: Build (darwin/amd64, cross-compiled via Apple clang)
         working-directory: app
         env:
           CGO_ENABLED: "1"
-          CGO_LDFLAGS: "-mmacosx-version-min=10.13"
+          GOARCH: "amd64"
+          CGO_CFLAGS: "-target x86_64-apple-macos10.13"
+          CGO_LDFLAGS: "-target x86_64-apple-macos10.13"
+          CC: "clang"
+          CXX: "clang++"
         run: wails build -production -o xbar
 
       - name: Assemble .app bundle (amd64)
