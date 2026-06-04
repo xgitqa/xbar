@@ -198,12 +198,19 @@ jobs:
         working-directory: app
         env:
           CGO_ENABLED: "1"
-          GOARCH: "amd64"
-          CGO_CFLAGS: "-target x86_64-apple-macos10.13"
-          CGO_LDFLAGS: "-target x86_64-apple-macos10.13"
-          CC: "clang"
-          CXX: "clang++"
-        run: wails build -production -o xbar
+          CGO_LDFLAGS: "-mmacosx-version-min=10.13"
+        run: |
+          # Wrap clang so CGO always targets x86_64 regardless of native arch
+          cat > /tmp/cc-x86_64 << 'WRAPPER'
+          #!/bin/bash
+          exec clang -target x86_64-apple-macos10.13 "$@"
+          WRAPPER
+          cat > /tmp/cxx-x86_64 << 'WRAPPER'
+          #!/bin/bash
+          exec clang++ -target x86_64-apple-macos10.13 "$@"
+          WRAPPER
+          chmod +x /tmp/cc-x86_64 /tmp/cxx-x86_64
+          CC=/tmp/cc-x86_64 CXX=/tmp/cxx-x86_64 GOARCH=amd64 wails build -production -platform darwin/amd64 -o xbar
 
       - name: Assemble .app bundle (amd64)
         working-directory: app
