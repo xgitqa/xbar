@@ -239,6 +239,8 @@ jobs:
     name: Package universal binary
     needs: [build-arm64, build-amd64]
     runs-on: macos-14
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
