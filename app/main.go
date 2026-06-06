@@ -44,7 +44,13 @@ func run() error {
 		HideWindowOnClose: true,
 		Mac: &mac.Options{
 			WebviewIsTransparent:          true,
-			WindowBackgroundIsTranslucent: true,
+			// Disabled: on macOS Sonoma/Sequoia, Wails alpha-74's
+			// makeWindowBackgroundTranslucent() passes NSWindowBelow (-1)
+			// to -[NSView addSubview:positioned:relativeTo:] through a 32-bit
+			// `int` objc_msgSend cast. On arm64 that zero-extends to
+			// 0xFFFFFFFF, tripping AppKit's new ordering-mode assertion and
+			// aborting at launch. Leaving this off skips that native path.
+			WindowBackgroundIsTranslucent: false,
 			TitleBar:                      mac.TitleBarHiddenInset(),
 			Menu:                          app.appMenu,
 			ActivationPolicy:              mac.NSApplicationActivationPolicyAccessory,

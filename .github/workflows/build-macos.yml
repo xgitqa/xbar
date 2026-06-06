@@ -4,7 +4,7 @@ name: Build macOS (Universal – Apple Silicon + Intel)
 # Apple Silicon and Intel Macs.
 #
 # HOW TO RELEASE (no command line needed):
-#   1. Go to: https://github.com/xgitqa/xbar/actions/workflows/build-macos.yml
+#   1. Go to: https://github.com/pixeline/xbar/actions/workflows/build-macos.yml
 #   2. Click "Run workflow"  (top right, branch: main)
 #   3. Set version = v2.1.8, set create_release = true
 #   4. Click the green "Run workflow" button
@@ -375,7 +375,7 @@ jobs:
           ## xbar ${V} - Universal Binary
 
           Runs natively on both **Apple Silicon** (arm64) and **Intel** (amd64) Macs.
-          Built from [xgitqa/xbar](https://github.com/xgitqa/xbar) -- maintained fork with Apple Silicon support.
+          Built from [pixeline/xbar](https://github.com/pixeline/xbar) -- maintained fork with Apple Silicon support.
 
           **Signing:** ${SIGNED}, ${NOTARISED}
 

@@ -12,7 +12,7 @@ xbar (the BitBar reboot) lets you put the output from any script/program in your
 
 ## Download
 
-**[⬇ Download latest release (Universal – Apple Silicon + Intel)](https://github.com/xgitqa/xbar/releases/latest)**
+**[⬇ Download latest release (Universal – Apple Silicon + Intel)](https://github.com/pixeline/xbar/releases/latest)**
 
 Unzip and drag **xbar.app** to `/Applications`.
 
@@ -23,7 +23,7 @@ Unzip and drag **xbar.app** to `/Applications`.
 
 ## Why this fork?
 
-| | Original (`matryer/xbar`) | This fork (`xgitqa/xbar`) |
+| | Original (`matryer/xbar`) | This fork (`pixeline/xbar`) |
 |---|---|---|
 | Apple Silicon (arm64) | Rosetta 2 only | Native ✓ |
 | Intel (amd64) | Native ✓ | Native ✓ |
@@ -43,7 +43,7 @@ Unzip and drag **xbar.app** to `/Applications`.
 
 ### Install
 
-1. [Download the latest release](https://github.com/xgitqa/xbar/releases/latest)
+1. [Download the latest release](https://github.com/pixeline/xbar/releases/latest)
 2. Unzip and drag **xbar.app** to `/Applications`
 3. Launch xbar — plugins live in `~/Library/Application Support/xbar/plugins/`
 
